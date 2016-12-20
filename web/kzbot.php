@@ -4,9 +4,10 @@ require_once('/app/vendor/autoload.php');
 use jp3cki\docomoDialogue\Dialogue;
 
 // アカウント情報設定
-$channelId     = getenv('LINE_CHANNEL_ID');
-$channelSecret = getenv('LINE_CHANNEL_SECRET');
-$mid           = getenv('LINE_CHANNEL_MID');
+$accessToken = getenv('LINE_CHANNEL_ACCESS_TOKEN');
+#$channelId     = getenv('LINE_CHANNEL_ID');
+#$channelSecret = getenv('LINE_CHANNEL_SECRET');
+#$mid           = getenv('LINE_CHANNEL_MID');
 $proxy         = getenv('FIXIE_URL');
 $docomoApiKey  = getenv('DOCOMO_API_KEY');
 $redisUrl      = getenv('REDIS_URL');
