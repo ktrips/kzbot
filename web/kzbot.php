@@ -42,6 +42,15 @@ if ($ret === false) {
 $text = $ret->utt;
 $redis->set($from, $ret->context);
 
+#$headers = array(
+#    "Content-Type: application/json",
+#    "X-Line-ChannelID: {$channelId}",
+#    "X-Line-ChannelSecret: {$channelSecret}",
+#    "X-Line-Trusted-User-With-ACL: {$mid}"
+#);
+
+#$url = "https://trialbot-api.line.me/v1/events";
+
 $post = <<< EOM
 {
     "to":["{$from}"],
@@ -55,22 +64,30 @@ $post = <<< EOM
 }
 EOM;
 
-$headers = array(
-    "Content-Type: application/json",
-    "X-Line-ChannelID: {$channelId}",
-    "X-Line-ChannelSecret: {$channelSecret}",
-    "X-Line-Trusted-User-With-ACL: {$mid}"
-);
+#$post_data = [
+#	"replyToken" => $replyToken,
+#	"messages" => [$response_format_text]
+#	];
+$ch = curl_init("https://api.line.me/v2/bot/message/reply");
+curl_setopt($ch, CURLOPT_POST, true);
+curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+#curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($post_data));
 
-$url = "https://trialbot-api.line.me/v1/events";
-
-$curl = curl_init($url);
-curl_setopt($curl, CURLOPT_POST, true);
-curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
-curl_setopt($curl, CURLOPT_POSTFIELDS, $post);
-curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+#$curl = curl_init($url);
+#curl_setopt($curl, CURLOPT_POST, true);
+#curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
+curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
+#curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
 //プロキシ経由フラグ
-curl_setopt($curl, CURLOPT_HTTPPROXYTUNNEL, 1);
+curl_setopt($ch, CURLOPT_HTTPPROXYTUNNEL, 1);
 //プロキシ設定
-curl_setopt($curl, CURLOPT_PROXY, $proxy);
-$output = curl_exec($curl);
+curl_setopt($ch, CURLOPT_PROXY, $proxy);
+#$output = curl_exec($curl);
+
+curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+    'Content-Type: application/json; charser=UTF-8',
+    'Authorization: Bearer ' . $accessToken
+    ));
+$result = curl_exec($ch);
+curl_close($ch);
