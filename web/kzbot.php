@@ -60,4 +60,4 @@ function chat($text) {
     $res = json_decode(file_get_contents($api_url, false, $stream));
 
     return $res->utt;
-//}
+}
