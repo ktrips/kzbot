@@ -87,9 +87,9 @@ curl_close($ch);
 //ドコモの雑談APIから雑談データを取得
 function chat($text) {
     // docomo chatAPI
-    #$api_key = '【docomoのAPI Keyを使用する】';
-    $docomoApiKey  = getenv('DOCOMO_API_KEY');
-    $api_url = sprintf('https://api.apigw.smt.docomo.ne.jp/dialogue/v1/dialogue?APIKEY=%s', $docomoApiKey);
+    $api_key = '5752424f45756b376e484969564c7562354b3852784c6b45526a4a4c646b766f4251312e4b555a49475a37';
+    #$docomoApiKey  = getenv('DOCOMO_API_KEY');
+    $api_url = sprintf('https://api.apigw.smt.docomo.ne.jp/dialogue/v1/dialogue?APIKEY=%s', $api_key);
     $req_body = array('utt' => $text);
 
     $headers = array(
