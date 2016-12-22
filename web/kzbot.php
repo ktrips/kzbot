@@ -11,6 +11,7 @@ foreach ($json_object->events as $event) {
     }
 }
 
+
 function api_post_request($token, $message) {
     $url = 'https://api.line.me/v2/bot/message/reply';
     $channel_access_token = 'Qw0I9IoxJ9S6QZRYXu7MF/onE3fSaGXjOZ5X9o8NjJUXqgDmbgj7pE8e8GY2RPzX7qJnOeVNkR+lm7SVpeaJroSiaV5clYnZ7fGadSn0j8OyqSp3prt7MjeWET4NB+N1LcnVCxe0A4IefmvRgjyQVgdB04t89/1O/w1cDnyilFU=';
