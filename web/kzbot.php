@@ -1,75 +1,27 @@
-<?php
-
-#require_once('/app/vendor/autoload.php');
-#use jp3cki\docomoDialogue\Dialogue;
-
-// アカウント情報設定
-$accessToken = getenv('LINE_CHANNEL_ACCESS_TOKEN');
-$proxy         = getenv('FIXIE_URL');
-$docomoApiKey  = getenv('DOCOMO_API_KEY');
-$redisUrl      = getenv('REDIS_URL');
-
-// メッセージ受信
-#$json_string  = file_get_contents('php://input');
-#$json_object  = json_decode($json_string);
-#$content      = $json_object->result{0}->content;
-#$text         = $content->text;
-#$from         = $content->from;
-#$message_id   = $content->id;
-#$content_type = $content->contentType;
-
-// $contextの設定
-#$redis   = new Predis\Client($redisUrl);
-#$context = $redis->get($from);
-
-#$dialog = new Dialogue($docomoApiKey);
-
-//Docomo  送信パラメータの準備
-#$dialog->parameter->reset();
-#$dialog->parameter->utt = $text;
-#$dialog->parameter->t = 20;
-#$dialog->parameter->context = $context;
-#$dialog->parameter->mode = $mode;
-
-#$ret = $dialog->request();
-
-#if ($ret === false) {
-#    $text = "通信に失敗しました";
-#}
-
-#$text = $ret->utt;
-#$redis->set($from, $ret->context);
-
-
+$accessToken = 'Qw0I9IoxJ9S6QZRYXu7MF/onE3fSaGXjOZ5X9o8NjJUXqgDmbgj7pE8e8GY2RPzX7qJnOeVNkR+lm7SVpeaJroSiaV5clYnZ7fGadSn0j8OyqSp3prt7MjeWET4NB+N1LcnVCxe0A4IefmvRgjyQVgdB04t89/1O/w1cDnyilFU=';
+ 
 //ユーザーからのメッセージ取得
 $json_string = file_get_contents('php://input');
 $jsonObj = json_decode($json_string);
-
-$type = $jsonObj->{"events"}[0]->{"message"}->{"type"};
-//メッセージ取得
+ 
+$type = $jsonObj--->{"events"}[0]->{"message"}->{"type"};
 $text = $jsonObj->{"events"}[0]->{"message"}->{"text"};
-//ReplyToken取得
 $replyToken = $jsonObj->{"events"}[0]->{"replyToken"};
-
-//メッセージ以外のときは何も返さず終了
-if($type != "text"){
-    exit;
-}
-
-//docomo返信
+ 
+ 
+//ドコモの雑談データ取得
 $response = chat($text);
-
-//返信データ作成
+ 
 $response_format_text = [
     "type" => "text",
-    "text" => $response
-    ];
-
+    "text" =>  $response
+  ];
+ 
 $post_data = [
-    "replyToken" => $replyToken,
-    "messages" => [$response_format_text]
-    ];
-
+	"replyToken" => $replyToken,
+	"messages" => [$response_format_text]
+	];
+ 
 $ch = curl_init("https://api.line.me/v2/bot/message/reply");
 curl_setopt($ch, CURLOPT_POST, true);
 curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
@@ -81,17 +33,15 @@ curl_setopt($ch, CURLOPT_HTTPHEADER, array(
     ));
 $result = curl_exec($ch);
 curl_close($ch);
-
-#$docomoApiKey  = getenv('DOCOMO_API_KEY');
-
+ 
+ 
 //ドコモの雑談APIから雑談データを取得
 function chat($text) {
     // docomo chatAPI
     $api_key = '5752424f45756b376e484969564c7562354b3852784c6b45526a4a4c646b766f4251312e4b555a49475a37';
-    #$docomoApiKey  = getenv('DOCOMO_API_KEY');
     $api_url = sprintf('https://api.apigw.smt.docomo.ne.jp/dialogue/v1/dialogue?APIKEY=%s', $api_key);
     $req_body = array('utt' => $text);
-
+    
     $headers = array(
         'Content-Type: application/json; charset=UTF-8',
     );
@@ -104,6 +54,6 @@ function chat($text) {
         );
     $stream = stream_context_create($options);
     $res = json_decode(file_get_contents($api_url, false, $stream));
-
+ 
     return $res->utt;
 }
