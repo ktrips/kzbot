@@ -37,25 +37,25 @@ function api_post_request($token, $message) {
 }
 
 //ドコモの雑談APIから雑談データを取得
-function chat($text) {
+//function chat($text) {
     // docomo chatAPI
-    $api_key = '5752424f45756b376e484969564c7562354b3852784c6b45526a4a4c646b766f4251312e4b555a49475a37';
+    //$api_key = '5752424f45756b376e484969564c7562354b3852784c6b45526a4a4c646b766f4251312e4b555a49475a37';
     //$api_key = '【docomoのAPI Keyを使用する】';
-    $api_url = sprintf('https://api.apigw.smt.docomo.ne.jp/dialogue/v1/dialogue?APIKEY=%s', $api_key);
-    $req_body = array('utt' => $text);
+    //$api_url = sprintf('https://api.apigw.smt.docomo.ne.jp/dialogue/v1/dialogue?APIKEY=%s', $api_key);
+    //$req_body = array('utt' => $text);
 
-    $headers = array(
-        'Content-Type: application/json; charset=UTF-8',
-    );
-    $options = array(
-        'http'=>array(
-            'method'  => 'POST',
-            'header'  => implode("\r\n", $headers),
-            'content' => json_encode($req_body),
-            )
-        );
-    $stream = stream_context_create($options);
-    $res = json_decode(file_get_contents($api_url, false, $stream));
+    //$headers = array(
+    //    'Content-Type: application/json; charset=UTF-8',
+    //);
+    //$options = array(
+    //    'http'=>array(
+    //        'method'  => 'POST',
+    //        'header'  => implode("\r\n", $headers),
+    //        'content' => json_encode($req_body),
+    //        )
+    //    );
+    //$stream = stream_context_create($options);
+    //$res = json_decode(file_get_contents($api_url, false, $stream));
 
-    return $res->utt;
-}
+    //return $res->utt;
+//}
