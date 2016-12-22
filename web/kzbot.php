@@ -11,6 +11,8 @@ foreach ($json_object->events as $event) {
     }
 }
 
+//docomo返信
+$message = chat($text);
 
 function api_post_request($token, $message) {
     $url = 'https://api.line.me/v2/bot/message/reply';
