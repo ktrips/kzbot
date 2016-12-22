@@ -5,14 +5,14 @@ $json_object = json_decode($json_string);
 
 foreach ($json_object->events as $event) {
     if('message' == $event->type){
-        api_post_request($event->replyToken, $event->message->text);
+        api_post_request($event->replyToken, chat($text));//$event->message->text);
     }else if('beacon' == $event->type){
         api_post_request($event->replyToken, 'BEACONイベント!!');
     }
 }
 
 //docomo返信
-$message = chat($text);
+//$message = chat($text);
 
 function api_post_request($token, $message) {
     $url = 'https://api.line.me/v2/bot/message/reply';
