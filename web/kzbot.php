@@ -5,6 +5,8 @@ $json_object = json_decode($json_string);
 //$redis = new Predis\Client(getenv('REDIS_URL'));
 
 foreach ($json_object->events as $event) {
+    $from = $event['content']['from'];
+    $event_message = $event['content']['text'];
     if('message' == $event->type){
         api_post_request($event->replyToken, chat($text));//$event->message->text);
     }else if('beacon' == $event->type){
