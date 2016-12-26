@@ -8,8 +8,8 @@ foreach ($json_object->events as $event) {
     //$from = $event->message->from;
     //$event_message = $event->message->text;
     $redisu = getenv('REDISURL');//new Predis\Client(getenv('REDISURL'));//redis://h:207058ae-9523-4f24-a6d7-4e63e9dc0423@ec2-54-83-192-24.compute-1.amazonaws.com:12159
-    $redis  = new Predis\Client($redisu);
-    //$context = $redis->get($event->message->from);
+    //$redis  = new Predis\Client($redisu);
+    $context = get($event->message->from);
     if('message' == $event->type){
         api_post_request($event->replyToken, chat($text));//$event->message->text);
     }else if('beacon' == $event->type){
