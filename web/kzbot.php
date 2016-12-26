@@ -1,6 +1,6 @@
 <?php
-require './predis/autoload.php';
-Predis\Autoloader::register();
+//require './predis/autoload.php';
+//Predis\Autoloader::register();
 
 $json_string = file_get_contents('php://input');
 $json_object = json_decode($json_string);
