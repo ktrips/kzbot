@@ -7,7 +7,7 @@ $json_object = json_decode($json_string);
 foreach ($json_object->events as $event) {
     //$from = $event->message->from;
     //$event_message = $event->message->text;
-    $redisu = getenv('REDIS_URL');//new Predis\Client(getenv('REDISURL'));//redis://h:207058ae-9523-4f24-a6d7-4e63e9dc0423@ec2-54-83-192-24.compute-1.amazonaws.com:12159
+    $redis = new Predis\Client(getenv('REDIS_URL'));//new Predis\Client(getenv('REDISURL'));//redis://h:207058ae-9523-4f24-a6d7-4e63e9dc0423@ec2-54-83-192-24.compute-1.amazonaws.com:12159
     //$redis  = new Predis\Client($redisu);
     //$context = get($event->message->from);
     if('message' == $event->type){
