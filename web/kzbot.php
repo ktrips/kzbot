@@ -1,12 +1,15 @@
 <?php
-require('../vendor/autoload.php');
+"require": {
+  "predis/predis": "1.0.3"
+}
+//require('../vendor/autoload.php');
 //require 'Predis/autoload.php';#'redis-regular-56758/autoload.php';
-Predis\Autoloader::register();
+//Predis\Autoloader::register();
 
 $json_string = file_get_contents('php://input');
 $json_object = json_decode($json_string);
 //$client = new Predis\Client();
-//$redis = new Predis\Client(getenv('REDIS_URL'));
+$redis = new Predis\Client(getenv('REDIS_URL'));
 
 foreach ($json_object->events as $event) {
     //$from = $event->message->from;
