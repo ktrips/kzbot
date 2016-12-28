@@ -1,7 +1,7 @@
 <?php
 require('../vendor/autoload.php');
 //require 'Predis/autoload.php';#'redis-regular-56758/autoload.php';
-//Predis\Autoloader::register();
+Predis\Autoloader::register();
 
 $json_string = file_get_contents('php://input');
 $json_object = json_decode($json_string);
