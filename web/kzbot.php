@@ -1,4 +1,5 @@
 <?php
+require_once( dirname(__FILE__). "/vendor/autoload.php" );
 //require 'Predis/autoload.php';#'redis-regular-56758/autoload.php';
 //Predis\Autoloader::register();
 
