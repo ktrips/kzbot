@@ -1,7 +1,4 @@
 <?php
-"require": {
-  "predis/predis": "1.0.3"
-}
 //require('../vendor/autoload.php');
 //require 'Predis/autoload.php';#'redis-regular-56758/autoload.php';
 //Predis\Autoloader::register();
