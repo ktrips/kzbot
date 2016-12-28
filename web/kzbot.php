@@ -13,7 +13,7 @@ foreach ($json_object->events as $event) {
     $redis->set($from, $response->context);
     
     $res_content = $event->message;
-    $event_message = $response
+    $event_message = $response;
     if('message' == $event->type){
         api_post_request($event->replyToken, $response);//chat($text));//$event->message->text);
     }else if('beacon' == $event->type){
