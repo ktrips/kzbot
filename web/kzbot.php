@@ -2,6 +2,7 @@
 
 $json_string = file_get_contents('php://input');
 $json_object = json_decode($json_string);
+// Redis connection
 $redis = new Predis\Client(getenv('REDIS_URL'));
 // docomo chatAPI
 $api_key = getenv('DOCOMO_API_KEY');
