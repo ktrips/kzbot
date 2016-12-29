@@ -3,13 +3,13 @@
 $json_string = file_get_contents('php://input');
 $json_object = json_decode($json_string);
 // Redis connection
-$redis = new Predis\Client(getenv('REDIS_URL'));
+//$redis = new Predis\Client(getenv('REDIS_URL'));
 // docomo chatAPI
 $api_key = getenv('DOCOMO_API_KEY');
 
 foreach ($json_object->events as $event) {
-    $from = $event->message->from;
-    $event_message = $event->message->text;
+    //$from = $event->message->from;
+    //$event_message = $event->message->text;
     //$context = $redis->get($from);
     //$response = chat($text, $context);
     // save context to Redis
@@ -56,10 +56,8 @@ function api_post_request($token, $message) {
 function chat($text) {//, $context) {
     //$api_key = '【docomoのAPI Keyを使用する】';
     $api_url = sprintf('https://api.apigw.smt.docomo.ne.jp/dialogue/v1/dialogue?APIKEY=%s', $api_key);
-    $req_body = array(
-        'utt' => $text
-        //'context' => $context,
-    );
+    $req_body = array('utt' => $text);
+        //'context' => $context);
     //$req_body['context'] = $text;
 
     $headers = array(
