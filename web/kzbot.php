@@ -10,15 +10,15 @@ $api_key = getenv('DOCOMO_API_KEY');
 foreach ($json_object->events as $event) {
     $from = $event->message->from;
     $event_message = $event->message->text;
-    $context = $redis->get($from);
-    $response = chat($text, $context);
+    //$context = $redis->get($from);
+    //$response = chat($text, $context);
     // save context to Redis
-    $redis->set($from, $response->context);
+    //$redis->set($from, $response->context);
     
-    $res_content = $event->message;
-    $event_message = $response;
+    //$res_content = $event->message;
+    //$event_message = $response;
     if('message' == $event->type){
-        api_post_request($event->replyToken, $response);//chat($text));//$event->message->text);
+        api_post_request($event->replyToken, chat($text));//$event->message->text);
     }else if('beacon' == $event->type){
         api_post_request($event->replyToken, 'BEACONが近くに来たよ！');
     }
@@ -53,14 +53,14 @@ function api_post_request($token, $message) {
 }
 
 //ドコモの雑談APIから雑談データを取得
-function chat($text, $context) {
+function chat($text) {//, $context) {
     //$api_key = '【docomoのAPI Keyを使用する】';
     $api_url = sprintf('https://api.apigw.smt.docomo.ne.jp/dialogue/v1/dialogue?APIKEY=%s', $api_key);
     $req_body = array(
         'utt' => $text
-        'context' => $context,
+        //'context' => $context,
     );
-    $req_body['context'] = $text;
+    //$req_body['context'] = $text;
 
     $headers = array(
         'Content-Type: application/json; charset=UTF-8',
