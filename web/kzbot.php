@@ -8,8 +8,8 @@ foreach ($json_object->events as $event) {
     // Redis connection
     //$redis = new Predis\Client(getenv('REDIS_URL'));
     //$type = $event->type;
-    //$from = $event->message->from;
-    //$self_message = $event->message->text;
+    $from = $event->message->from;
+    $self_message = $event->message->text;
     //$context = $redis->get($from);
     //$response = chat($text, $context);
     // save context to Redis
@@ -77,4 +77,19 @@ function chat($text) {
     $res = json_decode(file_get_contents($api_url, false, $stream));
 
     return $res->utt;
+}
+
+function dialogue($message, $context) {
+    $post_data = array('utt' => $message);
+    $post_data['context'] = $context;
+    // DOCOMOに送信
+    $ch = curl_init("https://api.apigw.smt.docomo.ne.jp/dialogue/v1/dialogue?APIKEY=". getenv('DOCOMO_API_key'));
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($post_data));
+    curl_setopt($ch, CURLOPT_HTTPHEADER, [
+        "Content-Type: application/json; charser=UTF-8"
+    ]);
+    $result = curl_exec($ch);
+    curl_close($ch);
+    return json_decode($result);
 }
