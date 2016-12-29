@@ -15,8 +15,9 @@ foreach ($json_object->events as $event) {
     
     //$res_content = $event->message;
     //$event_message = $response;
+    $docomo_message = chat($text);
     if('message' == $event->type){
-        api_post_request($event->replyToken, chat($text));//$event->message->text);
+        api_post_request($event->replyToken, $docomo_message);//$event->message->text);
     }else if('beacon' == $event->type){
         api_post_request($event->replyToken, 'BEACONが近くに来たよ！');
     }
