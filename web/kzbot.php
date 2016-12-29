@@ -6,7 +6,7 @@ $json_object = json_decode($json_string);
 
 foreach ($json_object->events as $event) {
     // Redis connection
-    //$redis = new Predis\Client(getenv('REDIS_URL'));
+    $redis = new Predis\Client(getenv('REDIS_URL'));
     $type = $event->message->type;
     $from = $event->message->from;
     $self_message = $event->message->text;
