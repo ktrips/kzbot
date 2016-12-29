@@ -6,9 +6,10 @@ $json_object = json_decode($json_string);
 
 foreach ($json_object->events as $event) {
     // Redis connection
-    //$redis = new Predis\Client(getenv('REDIS_URL'));
-    //$from = $event->message->from;
-    //$event_message = $event->message->text;
+    $redis = new Predis\Client(getenv('REDIS_URL'));
+    $type = $event->type;
+    $from = $event->message->from;
+    $self_message = $event->message->text;
     //$context = $redis->get($from);
     //$response = chat($text, $context);
     // save context to Redis
