@@ -1,4 +1,4 @@
-<?php
+ <?php
 require_once __DIR__.'/vendor/autoload.php';
 use Symfony\Component\HttpFoundation\Request;
 date_default_timezone_set('Asia/Tokyo');
@@ -8,7 +8,7 @@ $json_object = json_decode($json_string);
 
 foreach ($json_object->events as $event) {
     // Redis connection
-    $redis = new Predis\Client(getenv('REDIS_URL'));
+    //$redis = new Predis\Client(getenv('REDIS_URL'));
     $type = $event->message->type;
     $from = $event->message->from;
     $self_message = $event->message->text;
