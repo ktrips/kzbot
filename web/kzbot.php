@@ -9,15 +9,15 @@ require_once('/app/vendor/autoload.php');
 $json_string = file_get_contents('php://input');
 $json_object = json_decode($json_string);
 // アカウント情報設定
-$api_key  = getenv('DOCOMO_API_KEY');
+
 $proxy    = getenv('FIXIE_URL');
 $redisUrl = getenv('REDIS_URL');
 
-$content      = $json_object->result{0}->content;
-$text         = $content->text;
-$from         = $content->from;
-$message_id   = $content->id;
-$content_type = $content->contentType;
+//$content      = $json_object->result{0}->content;
+//$text         = $content->text;
+//$from         = $content->from;
+//$message_id   = $content->id;
+//$content_type = $content->contentType;
 
 // $contextの設定
 //$redis   = new Predis\Client($redisUrl);
@@ -87,6 +87,7 @@ function api_post_request($token, $message) {
 //ドコモの雑談APIから雑談データを取得
 function chat($text) {
     //$api_key = '【docomoのAPI Keyを使用する】';
+    $api_key  = getenv('DOCOMO_API_KEY');
     $api_url = sprintf('https://api.apigw.smt.docomo.ne.jp/dialogue/v1/dialogue?APIKEY=%s', $api_key);
     $req_body = array('utt' => $text);
         //'context' => $context);
