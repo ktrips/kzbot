@@ -1,5 +1,7 @@
  <?php
 require_once __DIR__.'/vendor/autoload.php';
+use Symfony\Component\HttpFoundation\Request;
+date_default_timezone_set('Asia/Tokyo');
 //use Symfony\Component\HttpFoundation\Request;
 //date_default_timezone_set('Asia/Tokyo');
 $json_string = file_get_contents('php://input');
