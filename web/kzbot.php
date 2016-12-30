@@ -1,7 +1,7 @@
 <?php
 //require_once('/app/vendor/autoload.php');
 //use jp3cki\docomoDialogue\Dialogue;
-require_once __DIR__.'/vendor/autoload.php';
+//require_once __DIR__.'/vendor/autoload.php';
 //use Symfony\Component\HttpFoundation\Request;
 //date_default_timezone_set('Asia/Tokyo');
 // メッセージ受信
