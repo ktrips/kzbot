@@ -87,8 +87,6 @@ function chat($text) {
     $api_key  = getenv('DOCOMO_API_KEY');
     $api_url = sprintf('https://api.apigw.smt.docomo.ne.jp/dialogue/v1/dialogue?APIKEY=%s', $api_key);
     $req_body = array('utt' => $text);
-        //'context' => $context);
-    //$req_body['context'] = $text;
 
     $headers = array(
         'Content-Type: application/json; charset=UTF-8',
@@ -106,28 +104,28 @@ function chat($text) {
     return $res->utt;
 }
 
-function dialogue($text, $context) {
+//function dialogue($text, $context) {
     //$api_key = '【docomoのAPI Keyを使用する】';
-    $api_key  = getenv('DOCOMO_API_KEY');
-    $api_url  = sprintf('https://api.apigw.smt.docomo.ne.jp/dialogue/v1/dialogue?APIKEY=%s', $api_key);
-    $req_body = array(
-        'utt' => $text,
-        'context' => $context,
-    );
-    $req_body['context'] = $text;
+//    $api_key  = getenv('DOCOMO_API_KEY');
+//    $api_url  = sprintf('https://api.apigw.smt.docomo.ne.jp/dialogue/v1/dialogue?APIKEY=%s', $api_key);
+//    $req_body = array(
+//        'utt' => $text,
+//        'context' => $context,
+//    );
+//    $req_body['context'] = $text;
     
-    $headers = array(
-        'Content-Type: application/json; charset=UTF-8',
-    );
-    $options = array(
-        'http'=>array(
-            'method'  => 'POST',
-            'header'  => implode("\r\n", $headers),
-            'content' => json_encode($req_body),
-            )
-        );
-    $stream = stream_context_create($options);
-    $res = json_decode(file_get_contents($api_url, false, $stream));
+//   $headers = array(
+//        'Content-Type: application/json; charset=UTF-8',
+//    );
+//    $options = array(
+//        'http'=>array(
+//            'method'  => 'POST',
+//            'header'  => implode("\r\n", $headers),
+//            'content' => json_encode($req_body),
+//            )
+//        );
+//    $stream = stream_context_create($options);
+//    $res = json_decode(file_get_contents($api_url, false, $stream));
 
-    return $res->utt;
-}
+//    return $res->utt;
+//}
