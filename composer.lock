@@ -15,7 +15,7 @@
     "prefer-lowest": false,
     "platform": {
         "ext-mbstring": "*",
-        "predis/predis": "1.*"
+        "predis/predis": "1.*",
     },
     "platform-dev": []
 }
