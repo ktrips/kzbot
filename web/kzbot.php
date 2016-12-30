@@ -5,8 +5,33 @@ require_once('/app/vendor/autoload.php');
 //date_default_timezone_set('Asia/Tokyo');
 //use Symfony\Component\HttpFoundation\Request;
 //date_default_timezone_set('Asia/Tokyo');
+// メッセージ受信
 $json_string = file_get_contents('php://input');
 $json_object = json_decode($json_string);
+// アカウント情報設定
+$api_key  = getenv('DOCOMO_API_KEY');
+$proxy    = getenv('FIXIE_URL');
+$redisUrl = getenv('REDIS_URL');
+
+$content      = $json_object->result{0}->content;
+$text         = $content->text;
+$from         = $content->from;
+$message_id   = $content->id;
+$content_type = $content->contentType;
+
+// $contextの設定
+//$redis   = new Predis\Client($redisUrl);
+//$context = $redis->get($from);
+//$dialog = new Dialogue($docomoApiKey);
+
+//Docomo  送信パラメータの準備
+//$dialog->parameter->reset();
+//$dialog->parameter->utt = $text;
+//$dialog->parameter->t = 20;
+//$dialog->parameter->context = $context;
+//$dialog->parameter->mode = $mode;
+
+//$ret = $dialog->request();
 
 foreach ($json_object->events as $event) {
     // Redis connection
@@ -61,8 +86,6 @@ function api_post_request($token, $message) {
 
 //ドコモの雑談APIから雑談データを取得
 function chat($text) {
-    // docomo chatAPI
-    $api_key = getenv('DOCOMO_API_KEY');
     //$api_key = '【docomoのAPI Keyを使用する】';
     $api_url = sprintf('https://api.apigw.smt.docomo.ne.jp/dialogue/v1/dialogue?APIKEY=%s', $api_key);
     $req_body = array('utt' => $text);
