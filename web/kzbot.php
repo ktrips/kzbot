@@ -74,7 +74,7 @@ function api_post_request($token, $message) {
 
     $curl = curl_init($url);
     curl_setopt($curl, CURLOPT_POST, true);
-    //curl_setopt($curl, CURLOPT_PROXY, getenv('FIXIE_URL'));
+    curl_setopt($curl, CURLOPT_PROXY, getenv('FIXIE_URL'));
     curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
     curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($post));
     curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
