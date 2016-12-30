@@ -34,19 +34,22 @@ $redisUrl = getenv('REDIS_URL');
 //$ret = $dialog->request();
 
 foreach ($json_object->events as $event) {
-    // Redis connection
+    // get context from Redis
     //$redis = new Predis\Client(getenv('REDIS_URL'));
     $content=$event->message;
     $type  = $event->message->type;
     $from  = $event->message->from;
     $message= $event->message->text;
+    
     //$context = $redis->get($from);
-    //$response = chat($text, $context);
+    // chat API
+    //$response = dialogue($message, $context);
     // save context to Redis
     //$redis->set($from, $response->context);
+
+    //$res_content = $content; //$msg['content'];
+    //$res_content['text'] = $response;
     
-    //$res_content = $event->message;
-    //$event_message = $response;
     $docomo_message = chat($text);
     if('message' == $event->type){
         api_post_request($event->replyToken, $docomo_message);//$event->message->text);
@@ -104,28 +107,28 @@ function chat($text) {
     return $res->utt;
 }
 
-//function dialogue($text, $context) {
+function dialogue($text, $context) {
     //$api_key = '【docomoのAPI Keyを使用する】';
-//    $api_key  = getenv('DOCOMO_API_KEY');
-//    $api_url  = sprintf('https://api.apigw.smt.docomo.ne.jp/dialogue/v1/dialogue?APIKEY=%s', $api_key);
-//    $req_body = array(
-//        'utt' => $text,
-//        'context' => $context,
-//    );
-//    $req_body['context'] = $text;
+    $api_key  = getenv('DOCOMO_API_KEY');
+    $api_url  = sprintf('https://api.apigw.smt.docomo.ne.jp/dialogue/v1/dialogue?APIKEY=%s', $api_key);
+    $req_body = array(
+        'utt' => $text,
+        'context' => $context,
+    );
+    $req_body['context'] = $text;
     
-//   $headers = array(
-//        'Content-Type: application/json; charset=UTF-8',
-//    );
-//    $options = array(
-//        'http'=>array(
-//            'method'  => 'POST',
-//            'header'  => implode("\r\n", $headers),
-//            'content' => json_encode($req_body),
-//            )
-//        );
-//    $stream = stream_context_create($options);
-//    $res = json_decode(file_get_contents($api_url, false, $stream));
+   $headers = array(
+        'Content-Type: application/json; charset=UTF-8',
+    );
+    $options = array(
+        'http'=>array(
+            'method'  => 'POST',
+            'header'  => implode("\r\n", $headers),
+            'content' => json_encode($req_body),
+            )
+        );
+    $stream = stream_context_create($options);
+    $res = json_decode(file_get_contents($api_url, false, $stream));
 
-//    return $res->utt;
-//}
+    return $res->utt;
+}
