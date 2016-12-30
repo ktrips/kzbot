@@ -1,11 +1,9 @@
 <?php
-require_once('/app/vendor/autoload.php');
-use jp3cki\docomoDialogue\Dialogue;
-//require_once __DIR__ . '/../vendor/autoload.php';
-//use Symfony\Component\HttpFoundation\Request;
-//date_default_timezone_set('Asia/Tokyo');
-//use Symfony\Component\HttpFoundation\Request;
-//date_default_timezone_set('Asia/Tokyo');
+//require_once('/app/vendor/autoload.php');
+//use jp3cki\docomoDialogue\Dialogue;
+require_once __DIR__.'/vendor/autoload.php';
+use Symfony\Component\HttpFoundation\Request;
+date_default_timezone_set('Asia/Tokyo');
 // メッセージ受信
 $json_string = file_get_contents('php://input');
 $json_object = json_decode($json_string);
@@ -36,7 +34,7 @@ $redisUrl = getenv('REDIS_URL');
 
 foreach ($json_object->events as $event) {
     // get context from Redis
-    $redis = new Predis\Client(getenv('REDIS_URL'));
+    //$redis = new Predis\Client(getenv('REDIS_URL'));
     $content=$event->message;
     $type  = $event->message->type;
     $from  = $event->message->from;
