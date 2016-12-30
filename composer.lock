@@ -14,8 +14,7 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "ext-mbstring": "*",
-        "predis/predis": "1.*",
+        "ext-mbstring": "*"
     },
     "platform-dev": []
 }
