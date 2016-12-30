@@ -8,7 +8,7 @@ $json_object = json_decode($json_string);
 
 foreach ($json_object->events as $event) {
     // Redis connection
-    $redis = new Predis\Client(getenv('REDIS_URL'));
+    //$redis = new Predis\Client(getenv('REDIS_URL'));
     $type = $event->message->type;
     $from = $event->message->from;
     $self_message = $event->message->text;
@@ -49,6 +49,7 @@ function api_post_request($token, $message) {
 
     $curl = curl_init($url);
     curl_setopt($curl, CURLOPT_POST, true);
+    curl_setopt($curl, CURLOPT_PROXY, getenv('FIXIE_URL'));
     curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
     curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($post));
     curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
