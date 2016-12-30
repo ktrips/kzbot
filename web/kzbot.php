@@ -20,7 +20,7 @@ $redisUrl = getenv('REDIS_URL');
 //$content_type = $content->contentType;
 
 // $contextの設定
-$redis   = new Predis\Client($redisUrl);
+//$redis   = new Predis\Client($redisUrl);
 //$context = $redis->get($from);
 //$dialog = new Dialogue($docomoApiKey);
 
@@ -55,9 +55,6 @@ foreach ($json_object->events as $event) {
     }
 }
 
-//docomo返信
-//$message = chat($text);
-
 function api_post_request($token, $message) {
     $url = 'https://api.line.me/v2/bot/message/reply';
     $channel_access_token = getenv('LINE_CHANNEL_ACCESS_TOKEN');
@@ -77,7 +74,7 @@ function api_post_request($token, $message) {
 
     $curl = curl_init($url);
     curl_setopt($curl, CURLOPT_POST, true);
-    curl_setopt($curl, CURLOPT_PROXY, getenv('FIXIE_URL'));
+    //curl_setopt($curl, CURLOPT_PROXY, getenv('FIXIE_URL'));
     curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
     curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($post));
     curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
@@ -109,17 +106,28 @@ function chat($text) {
     return $res->utt;
 }
 
-function dialogue($message, $context) {
-    $post_data = array('utt' => $message);
-    $post_data['context'] = $context;
-    // DOCOMOに送信
-    $ch = curl_init("https://api.apigw.smt.docomo.ne.jp/dialogue/v1/dialogue?APIKEY=". getenv('DOCOMO_API_key'));
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($post_data));
-    curl_setopt($ch, CURLOPT_HTTPHEADER, [
-        "Content-Type: application/json; charser=UTF-8"
-    ]);
-    $result = curl_exec($ch);
-    curl_close($ch);
-    return json_decode($result);
+function dialogue($text, $context) {
+    //$api_key = '【docomoのAPI Keyを使用する】';
+    $api_key  = getenv('DOCOMO_API_KEY');
+    $api_url  = sprintf('https://api.apigw.smt.docomo.ne.jp/dialogue/v1/dialogue?APIKEY=%s', $api_key);
+    $req_body = array(
+        'utt' => $text,
+        'context' => $context,
+    );
+    $req_body['context'] = $text;
+    
+    $headers = array(
+        'Content-Type: application/json; charset=UTF-8',
+    );
+    $options = array(
+        'http'=>array(
+            'method'  => 'POST',
+            'header'  => implode("\r\n", $headers),
+            'content' => json_encode($req_body),
+            )
+        );
+    $stream = stream_context_create($options);
+    $res = json_decode(file_get_contents($api_url, false, $stream));
+
+    return $res->utt;
 }
