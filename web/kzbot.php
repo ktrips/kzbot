@@ -36,7 +36,7 @@ $redisUrl = getenv('REDIS_URL');
 
 foreach ($json_object->events as $event) {
     // get context from Redis
-    //$redis = new Predis\Client(getenv('REDIS_URL'));
+    $redis = new Predis\Client(getenv('REDIS_URL'));
     $content=$event->message;
     $type  = $event->message->type;
     $from  = $event->message->from;
