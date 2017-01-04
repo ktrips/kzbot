@@ -12,15 +12,15 @@ $json_object = json_decode($json_string);
 $proxy    = getenv('FIXIE_URL');
 $redisUrl = getenv('REDIS_URL');
 
-//$content      = $json_object->result{0}->content;
-//$text         = $content->text;
-//$from         = $content->from;
+$content      = $json_object->result{0}->content;
+$text         = $content->text;
+$from         = $content->from;
 //$message_id   = $content->id;
 //$content_type = $content->contentType;
 
 // $contextの設定
 $redis   = new Predis\Client($redisUrl);
-//$context = $redis->get($from);
+$context = $redis->get($from);
 //$dialog = new Dialogue($docomoApiKey);
 
 //Docomo  送信パラメータの準備
