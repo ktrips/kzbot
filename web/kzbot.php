@@ -100,9 +100,9 @@ foreach ($json_object->events as $event) {
     //$res_content['text'] = $response;
     
     $docomo_message = chat($text);
-    if(1 == $contentType){
+    if($contentType == 1){
         api_post_request($event->replyToken, $docomo_message);//$event->message->text);
-    }else if(2 == $contentType){
+    }else if($contentType == 2){
         api_post_request($event->replyToken, 'Imageだよ！');
     }else if('message' == $event->type){
         api_post_request($event->replyToken, $docomo_message);//$event->message->text);
