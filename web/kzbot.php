@@ -100,12 +100,14 @@ foreach ($json_object->events as $event) {
     //$res_content['text'] = $response;
     
     $docomo_message = chat($text);
-    if('message' == $event->type){
+    if(1 == $contentType){
+        api_post_request($event->replyToken, $docomo_message);//$event->message->text);
+    }else if(2 == $contentType){
+        api_post_request($event->replyToken, 'Imageだよ！');
+    }else if('message' == $event->type){
         api_post_request($event->replyToken, $docomo_message);//$event->message->text);
     }else if('beacon' == $event->type){
         api_post_request($event->replyToken, 'BEACONが近くに来たよ！');
-    }else if(2 == $contentType){
-        api_post_request($event->replyToken, 'Imageだよ！');
     }
 }
 
