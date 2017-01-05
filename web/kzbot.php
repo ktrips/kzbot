@@ -11,6 +11,7 @@ $json_object = json_decode($json_string);
 
 $proxy    = getenv('FIXIE_URL');
 $redisUrl = getenv('REDIS_URL');
+$gvision  = getenv('GOOGLE_VISION_KEY');
 
 //$content      = $json_object->result{0}->content;
 //$text         = $content->text;
