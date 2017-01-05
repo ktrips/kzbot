@@ -15,6 +15,51 @@ $gvision  = getenv('GOOGLE_VISION_KEY');
 
 $gvisionUrl= "https://vision.googleapis.com/v1/images:annotate?key=".$gvision;
 
+// 画像へのパス
+$image_path = "./image.jpg" ;
+
+// リクエスト用のJSONを作成
+$image_json = json_encode( array(
+	"requests" => array(
+			array(
+				"image" => array(
+					"content" => base64_encode( file_get_contents( $image_path ) ) ,
+				) ,
+				"features" => array(
+					array(
+						"type" => "FACE_DETECTION" ,
+						"maxResults" => 3 ,
+					) ,
+					array(
+						"type" => "LANDMARK_DETECTION" ,
+						"maxResults" => 3 ,
+					) ,
+					array(
+						"type" => "LOGO_DETECTION" ,
+						"maxResults" => 3 ,
+					) ,
+					array(
+						"type" => "LABEL_DETECTION" ,
+						"maxResults" => 3 ,
+					) ,
+					array(
+						"type" => "TEXT_DETECTION" ,
+						"maxResults" => 3 ,
+					) ,
+					array(
+						"type" => "SAFE_SEARCH_DETECTION" ,
+						"maxResults" => 3 ,
+					) ,
+					array(
+						"type" => "IMAGE_PROPERTIES" ,
+						"maxResults" => 3 ,
+					) ,
+				) ,
+			) ,
+		) ,
+	) 
+) ;
+
 //$content      = $json_object->result{0}->content;
 //$text         = $content->text;
 //$from         = $content->from;
