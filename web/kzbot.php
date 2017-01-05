@@ -13,6 +13,8 @@ $proxy    = getenv('FIXIE_URL');
 $redisUrl = getenv('REDIS_URL');
 $gvision  = getenv('GOOGLE_VISION_KEY');
 
+$gvisionUrl= "https://vision.googleapis.com/v1/images:annotate?key=".$gvision;
+
 //$content      = $json_object->result{0}->content;
 //$text         = $content->text;
 //$from         = $content->from;
