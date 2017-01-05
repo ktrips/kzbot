@@ -103,6 +103,8 @@ foreach ($json_object->events as $event) {
         api_post_request($event->replyToken, $docomo_message);//$event->message->text);
     }else if('beacon' == $event->type){
         api_post_request($event->replyToken, 'BEACONが近くに来たよ！');
+    }else if('image' == $event->type){
+        api_post_request($event->replyToken, 'Imageだよ！');
     }
 }
 
