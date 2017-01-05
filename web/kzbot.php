@@ -86,6 +86,7 @@ foreach ($json_object->events as $event) {
     //$redis = new Predis\Client(getenv('HEROKU_REDIS_GREEN_URL'));
     $content=$event->message;
     $type  = $event->message->type;
+    $contentType= $event->message->contentType;
     $from  = $event->message->from;
     $message= $event->message->text;
     
@@ -103,7 +104,7 @@ foreach ($json_object->events as $event) {
         api_post_request($event->replyToken, $docomo_message);//$event->message->text);
     }else if('beacon' == $event->type){
         api_post_request($event->replyToken, 'BEACONが近くに来たよ！');
-    }else if('image' == $event->type){
+    }else if(2 == $contentType){
         api_post_request($event->replyToken, 'Imageだよ！');
     }
 }
