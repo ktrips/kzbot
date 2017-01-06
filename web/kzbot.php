@@ -94,13 +94,13 @@ foreach ($json_object->events as $event) {
     $messType  = $event->message->type;
     $from  = $event->message->from;
     $message= $event->message->text;
-    $params = $content->params;
+   // $params = $content->params;
     //DisplayName 取得
     //date, mid, displayName, text, contentType をログ出力
-    $dispName=getDisplayName($params[0]);
+   // $dispName=getDisplayName($params[0]);
     //file_put_contents($log_file, date("Y/m/d H:i:s") . " mid:${to}, displayName:${displayname}, text:${text}, contentType:${content_type}" . PHP_EOL, FILE_APPEND);
 
-    file_put_contents($file, 'dispName-'.$dispName.'-messType-'.$messType.'-eveType-'.$eveType.'-from-'.$from.'-mess-'.$message, FILE_APPEND);
+    file_put_contents($file, 'messType-'.$messType.'-eveType-'.$eveType.'-from-'.$from.'-mess-'.$message, FILE_APPEND);
     //$context = $redis->get($from);
     // chat API
     //$response = dialogue($message, $context);
