@@ -91,7 +91,7 @@ foreach ($json_object->events as $event) {
     $content=$event->message;
     //$content64  = base64_encode($content);
     $eveType= $event->type;
-    $contUrl= $event->originalContentUrl;
+    $contUrl= $event->message->originalContentUrl;
     $messType  = $event->message->type;
     $from  = $event->message->from;
     $message= $event->message->text;
