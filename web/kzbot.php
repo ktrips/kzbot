@@ -60,6 +60,7 @@ $image_json = json_encode( array(
 	) 
 ) ;
 
+echo $image_json;
 //$content      = $json_object->result{0}->content;
 //$text         = $content->text;
 //$from         = $content->from;
@@ -89,6 +90,11 @@ foreach ($json_object->events as $event) {
     $contentType= $event->message->contentType;
     $from  = $event->message->from;
     $message= $event->message->text;
+
+    echo $type;
+    echo $contentType;
+    echo $from;
+    echo $message;
     
     //$context = $redis->get($from);
     // chat API
