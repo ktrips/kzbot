@@ -86,7 +86,7 @@ foreach ($json_object->events as $event) {
     // get context from Redis
     //$redis = new Predis\Client(getenv('REDIS_URL'));
     //$redis = new Predis\Client(getenv('HEROKU_REDIS_GREEN_URL'));
-    $eve    = $json_object->result{0};
+    $eve    = $json_object->events;
     //$eve64  = base64_encode($eve);
     $content=$event->message;
     //$content64  = base64_encode($content);
@@ -100,7 +100,7 @@ foreach ($json_object->events as $event) {
    // $dispName=getDisplayName($params[0]);
     //file_put_contents($log_file, date("Y/m/d H:i:s") . " mid:${to}, displayName:${displayname}, text:${text}, contentType:${content_type}" . PHP_EOL, FILE_APPEND);
 
-    file_put_contents($file, 'messType-'.$messType.'-eveType-'.$eveType.'-from-'.$from.'-mess-'.$message, FILE_APPEND);
+    file_put_contents($file, 'eve-'.$eve.'-messType-'.$messType.'-eveType-'.$eveType.'-from-'.$from.'-mess-'.$message, FILE_APPEND);
     //$context = $redis->get($from);
     // chat API
     //$response = dialogue($message, $context);
