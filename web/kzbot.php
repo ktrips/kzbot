@@ -62,7 +62,6 @@ $image_json = json_encode( array(
 	) 
 ) ;
 
-file_put_contents($file, $image_json, FILE_APPEND);
 //$content      = $json_object->result{0}->content;
 //$text         = $content->text;
 //$from         = $content->from;
@@ -97,7 +96,7 @@ foreach ($json_object->events as $event) {
     echo $contentType;
     echo $from;
     echo $message;
-    file_put_contents($file, $contentType, FILE_APPEND);
+    file_put_contents($file, 'type-'.$Type.'-contType-'.$contentType.'-from-'.$from.'-messe-'.$message, FILE_APPEND);
     //$context = $redis->get($from);
     // chat API
     //$response = dialogue($message, $context);
