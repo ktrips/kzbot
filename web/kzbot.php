@@ -87,18 +87,17 @@ foreach ($json_object->events as $event) {
     //$redis = new Predis\Client(getenv('REDIS_URL'));
     //$redis = new Predis\Client(getenv('HEROKU_REDIS_GREEN_URL'));
     $eve    = $json_object->result{0};
-    $eve64  = base64_encode($eve);;
+    $eve64  = base64_encode($eve);
     $content=$event->message;
     $content64  = base64_encode($content);
     $eveType= $event->type;
     $messType  = $event->message->type;
     $from  = $event->message->from;
     $message= $event->message->text;
-    $mes64  = base64_encode($message);
     //body = JSON.parse(body);
     //body.toString('base64')
 
-    file_put_contents($file, 'eve-'.$eve.'-content-'.$content.'-messType-'.$messType.'-eveType-'.$eveType.'-from-'.$from.'-mess-'.$mess, FILE_APPEND);
+    file_put_contents($file, 'eve-'.$eve.'-content-'.$content.'-messType-'.$messType.'-eveType-'.$eveType.'-from-'.$from.'-mess-'.$message, FILE_APPEND);
     //$context = $redis->get($from);
     // chat API
     //$response = dialogue($message, $context);
