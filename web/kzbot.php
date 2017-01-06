@@ -91,8 +91,10 @@ foreach ($json_object->events as $event) {
     $messType  = $event->message->type;
     $from  = $event->message->from;
     $message= $event->message->text;
+    //body = JSON.parse(body);
+    //body.toString('base64')
 
-    file_put_contents($file, 'messType-'.$messType.'-eveType-'.$eveType.'-from-'.$from.'-messe-'.$message, FILE_APPEND);
+    file_put_contents($file, 'eve-'.$event.'-messType-'.$messType.'-eveType-'.$eveType.'-from-'.$from.'-messe-'.$message, FILE_APPEND);
     //$context = $redis->get($from);
     // chat API
     //$response = dialogue($message, $context);
