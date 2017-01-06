@@ -93,6 +93,7 @@ foreach ($json_object->events as $event) {
     $eveType= $event->type;
     $contUrl= $event->message->originalContentUrl;
     $messType  = $event->message->type;
+    $beaconType= $event->message->beacon->type;
     $from  = $event->message->from;
     $message= $event->message->text;
     $userId = $event->source->userId;
@@ -111,7 +112,7 @@ foreach ($json_object->events as $event) {
    // $dispName=getDisplayName($params[0]);
     //file_put_contents($log_file, date("Y/m/d H:i:s") . " mid:${to}, displayName:${displayname}, text:${text}, contentType:${content_type}" . PHP_EOL, FILE_APPEND);
 
-    file_put_contents($file, 'userId-'.$userId.'-eveType-'.$eveType.'-contUrl-'.$contUrl.'-mess-'.$message, FILE_APPEND);
+    file_put_contents($file, 'userId-'.$userId.'-messType-'.$messType.'-beaconType-'.$beaconType.'-mess-'.$message, FILE_APPEND);
     //$context = $redis->get($from);
     // chat API
     //$response = dialogue($message, $context);
