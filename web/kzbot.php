@@ -95,9 +95,9 @@ foreach ($json_object->events as $event) {
     $from  = $event->message->from;
     $message= $event->message->text;
     $userId = $event->source->userId;
-    //$httpClient = new \LINE\LINEBot\HTTPClient\CurlHTTPClient(getenv('LINE_CHANNEL_ACCESS_TOKEN'));
-    //$bot = new \LINE\LINEBot($httpClient, ['channelSecret' => getenv('LINE_CHANNEL_SECRET')]);
-    //$response = $bot->getProfile('<userId>');
+    $httpClient = new \LINE\LINEBot\HTTPClient\CurlHTTPClient(getenv('LINE_CHANNEL_ACCESS_TOKEN'));
+    $bot = new \LINE\LINEBot($httpClient, ['channelSecret' => getenv('LINE_CHANNEL_SECRET')]);
+    $response = $bot->getProfile($userId);
     //if ($response->isSucceeded()) {
     	//$profile = $response->getJSONDecodedBody();
     	//echo $profile['displayName'];
