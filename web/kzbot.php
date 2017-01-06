@@ -87,12 +87,12 @@ foreach ($json_object->events as $event) {
     //$redis = new Predis\Client(getenv('REDIS_URL'));
     //$redis = new Predis\Client(getenv('HEROKU_REDIS_GREEN_URL'));
     $content=$event->message;
-    $type  = $event->message->type;
+    $messtype  = $event->message->type;
     $eveType= $event->type;
     $from  = $event->message->from;
     $message= $event->message->text;
 
-    file_put_contents($file, 'Type-'.$type.'-EveType-'.$eveType.'-from-'.$from.'-messe-'.$message, FILE_APPEND);
+    file_put_contents($file, 'messType-'.$messType.'-eveType-'.$eveType.'-from-'.$from.'-messe-'.$message, FILE_APPEND);
     //$context = $redis->get($from);
     // chat API
     //$response = dialogue($message, $context);
@@ -103,11 +103,13 @@ foreach ($json_object->events as $event) {
     //$res_content['text'] = $response;
     
     $docomo_message = chat($text);
-    if($eveType == 'image'){
+    if($messType == 'image'){
         api_post_request($event->replyToken, 'Imageだよ！');
-    }else if('message' == $event->type){
-        api_post_request($event->replyToken, $docomo_message);//$event->message->text);
-    }else if('beacon' == $event->type){
+    }else if($messType == 'sticker'){
+        api_post_request($event->replyToken, 'Stickerだよ！');
+    }else if($messType == 'text'){
+        api_post_request($event->replyToken, $docomo_message);
+    }else if($messType == 'beacon'){
         api_post_request($event->replyToken, 'BEACONが近くに来たよ！');
     }
 }
