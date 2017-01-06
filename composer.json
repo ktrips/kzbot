@@ -2,7 +2,7 @@
     "require": {
         "ext-mbstring": "*",
         "silex/silex": "^1.3",
-        "predis/predis": "1.*",
+        "predis/predis": "~1.1@dev",
         "heroku/heroku-buildpack-php": "*"
     }
 }
