@@ -91,13 +91,14 @@ foreach ($json_object->events as $event) {
     $content=$event->message;
     //$content64  = base64_encode($content);
     $eveType= $event->type;
+    $contUrl= $event->originalContentUrl;
     $messType  = $event->message->type;
     $from  = $event->message->from;
     $message= $event->message->text;
     $userId = $event->source->userId;
-    $httpClient = new \LINE\LINEBot\HTTPClient\CurlHTTPClient(getenv('LINE_CHANNEL_ACCESS_TOKEN'));
-    $bot = new \LINE\LINEBot($httpClient, ['channelSecret' => getenv('LINE_CHANNEL_SECRET')]);
-    $response = $bot->getProfile($userId);
+    //$httpClient = new \LINE\LINEBot\HTTPClient\CurlHTTPClient(getenv('LINE_CHANNEL_ACCESS_TOKEN'));
+    //$bot = new \LINE\LINEBot($httpClient, ['channelSecret' => getenv('LINE_CHANNEL_SECRET')]);
+    //$response = $bot->getProfile($userId);
     //if ($response->isSucceeded()) {
     	//$profile = $response->getJSONDecodedBody();
     	//echo $profile['displayName'];
@@ -110,7 +111,7 @@ foreach ($json_object->events as $event) {
    // $dispName=getDisplayName($params[0]);
     //file_put_contents($log_file, date("Y/m/d H:i:s") . " mid:${to}, displayName:${displayname}, text:${text}, contentType:${content_type}" . PHP_EOL, FILE_APPEND);
 
-    file_put_contents($file, 'userId-'.$userId.'-eveType-'.$eveType.'-from-'.$from.'-mess-'.$message, FILE_APPEND);
+    file_put_contents($file, 'userId-'.$userId.'-eveType-'.$eveType.'-contUrl-'.$contUrl.'-mess-'.$message, FILE_APPEND);
     //$context = $redis->get($from);
     // chat API
     //$response = dialogue($message, $context);
