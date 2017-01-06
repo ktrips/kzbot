@@ -84,7 +84,7 @@ $image_json = json_encode( array(
 
 foreach ($json_object->events as $event) {
     // get context from Redis
-    //$redis = new Predis\Client(getenv('REDIS_URL'));
+    $redis = new Predis\Client(getenv('REDIS_URL'));
     //$redis = new Predis\Client(getenv('HEROKU_REDIS_GREEN_URL'));
     $eve    = $json_object->events;
     //$eve64  = base64_encode($eve);
