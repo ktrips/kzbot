@@ -88,11 +88,11 @@ foreach ($json_object->events as $event) {
     //$redis = new Predis\Client(getenv('HEROKU_REDIS_GREEN_URL'));
     $content=$event->message;
     $type  = $event->message->type;
-    $contentType= $event->contentType;
-    $from  = $event->from;
+    $eveType= $event->type;
+    $from  = $event->message->from;
     $message= $event->message->text;
 
-    file_put_contents($file, 'type-'.$type.'-contType-'.$contentType.'-from-'.$from.'-messe-'.$message, FILE_APPEND);
+    file_put_contents($file, 'Type-'.$type.'-EveType-'.$eveType.'-from-'.$from.'-messe-'.$message, FILE_APPEND);
     //$context = $redis->get($from);
     // chat API
     //$response = dialogue($message, $context);
@@ -103,9 +103,7 @@ foreach ($json_object->events as $event) {
     //$res_content['text'] = $response;
     
     $docomo_message = chat($text);
-    if($contentType == 1){
-        api_post_request($event->replyToken, $docomo_message);//$event->message->text);
-    }else if($contentType == 2){
+    if($eveType == 'image'){
         api_post_request($event->replyToken, 'Imageだよ！');
     }else if('message' == $event->type){
         api_post_request($event->replyToken, $docomo_message);//$event->message->text);
