@@ -88,15 +88,11 @@ foreach ($json_object->events as $event) {
     //$redis = new Predis\Client(getenv('HEROKU_REDIS_GREEN_URL'));
     $content=$event->message;
     $type  = $event->message->type;
-    $contentType= $event->message->contentType;
-    $from  = $event->message->from;
+    $contentType= $event->contentType;
+    $from  = $event->from;
     $message= $event->message->text;
 
-    echo $type;
-    echo $contentType;
-    echo $from;
-    echo $message;
-    file_put_contents($file, 'type-'.$Type.'-contType-'.$contentType.'-from-'.$from.'-messe-'.$message, FILE_APPEND);
+    file_put_contents($file, 'type-'.$type.'-contType-'.$contentType.'-from-'.$from.'-messe-'.$message, FILE_APPEND);
     //$context = $redis->get($from);
     // chat API
     //$response = dialogue($message, $context);
