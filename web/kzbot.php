@@ -1,4 +1,6 @@
 <?php
+$file = "php://stderr";
+
 //require_once('/app/vendor/autoload.php');
 //use jp3cki\docomoDialogue\Dialogue;
 //require_once __DIR__.'/vendor/autoload.php';
@@ -60,7 +62,7 @@ $image_json = json_encode( array(
 	) 
 ) ;
 
-echo $image_json;
+file_put_contents($file, $image_json, FILE_APPEND);
 //$content      = $json_object->result{0}->content;
 //$text         = $content->text;
 //$from         = $content->from;
@@ -95,7 +97,7 @@ foreach ($json_object->events as $event) {
     echo $contentType;
     echo $from;
     echo $message;
-    
+    file_put_contents($file, $contentType, FILE_APPEND);
     //$context = $redis->get($from);
     // chat API
     //$response = dialogue($message, $context);
